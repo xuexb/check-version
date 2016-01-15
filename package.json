@@ -1,0 +1,28 @@
+{
+  "name": "check-version",
+  "version": "1.0.0",
+  "description": "Inspection Service version",
+  "main": "lib/index.js",
+  "scripts": {
+    "check": "fecs check src/ test/",
+    "compile": "babel --optional runtime --loose all --stage 0 --modules common src/ --out-dir lib/",
+    "watch": "npm run compile -- --watch",
+    "start": "node lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuexb/check-version.git"
+  },
+  "author": "xiaowu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xuexb/check-version/issues"
+  },
+  "homepage": "https://github.com/xuexb/check-version#readme",
+  "devDependencies": {
+    "babel": "5.8.21",
+    "fecs": "0.4.x",
+    "request": "^2.67.0",
+    "babel-runtime": "^5.8.20"
+  }
+}

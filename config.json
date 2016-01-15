@@ -1,0 +1,14 @@
+{
+    "rule": [
+        {
+            "name": "nginx",
+            "url": "http://nginx.org/",
+            "reg": ""
+        },
+        {
+            "name": "nodejs",
+            "url": "https://nodejs.org/en/",
+            "reg": ""
+        }
+    ]
+}
