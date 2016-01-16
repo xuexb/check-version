@@ -1,5 +1,3 @@
-
-
 /**
  * @file check-version
  * @author xiaowu
