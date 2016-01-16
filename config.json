@@ -3,12 +3,42 @@
         {
             "name": "nginx",
             "url": "http://nginx.org/",
-            "reg": ""
+            "reg": "class=\"date\"><a name=\".+?\"><\/a>.+?<\/td><td><p><a href=\"en\/download.html\">nginx-([^\/]+?)<\/a>"
         },
         {
-            "name": "nodejs",
-            "url": "https://nodejs.org/en/",
-            "reg": ""
+            "name": "jquery 1.x",
+            "url": "http://jquery.com/",
+            "reg": "<span class=\"download\"></span>[\\s\\S]+?Download jQuery[\\s\\S]+?<span>v(.+?) or"
+        },
+        {
+            "name": "jquery 2.x",
+            "url": "http://jquery.com/",
+            "reg": "Download jQuery[\\s\\S]+?<span>v.+? or v(.+?)<\/span>"
+        },
+        {
+            "name": "requirejs",
+            "url": "http://requirejs.org/",
+            "reg": "Latest Release: <.+?>(.+?)<\/a>"
+        },
+        {
+            "name": "seajs 2.x",
+            "url": "https://github.com/seajs/seajs/releases",
+            "reg": "Latest release[\\s\\S]+?<span class=\"css-truncate-target\">(.+?)<\/span>"
+        },
+        {
+            "name": "thinkjs 2.x",
+            "url": "https://github.com/75team/thinkjs/releases",
+            "reg": "<span class=\"tag-name\">(.+?)</span>"
+        },
+        {
+            "name": "key-cache",
+            "url": "https://github.com/xuexb/key-cache/releases",
+            "reg": "<span class=\"tag-name\">(.+?)</span>"
+        },
+        {
+            "name": "mdjs",
+            "url": "https://github.com/xuexb/mdjs/releases",
+            "reg": "<span class=\"tag-name\">(.+?)</span>"
         }
     ]
 }
