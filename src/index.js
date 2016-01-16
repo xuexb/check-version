@@ -9,8 +9,6 @@
 'use strict';
 
 import request from 'request';
-import fs from 'fs';
-import path from 'path';
 
 import config from '../config.json';
 import header from '../header.json';
