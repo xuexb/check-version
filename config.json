@@ -43,17 +43,20 @@
         {
             "name": "thinkjs 2.x",
             "url": "https://github.com/75team/thinkjs/releases",
-            "reg": "<span class=\"tag-name\">(.+?)</span>"
+            "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
+            "match": "$2"
         },
         {
             "name": "key-cache",
             "url": "https://github.com/xuexb/key-cache/releases",
-            "reg": "<span class=\"tag-name\">(.+?)</span>"
+            "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
+            "match": "$2"
         },
         {
             "name": "mdjs",
             "url": "https://github.com/xuexb/mdjs/releases",
-            "reg": "<span class=\"tag-name\">(.+?)</span>"
+            "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
+            "match": "$2"
         }
     ]
 }
