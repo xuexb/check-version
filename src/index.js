@@ -25,18 +25,14 @@ rule.forEach((val) => {
             url: val.url
         }, (error, response, body) => {
             if (error) {
-                reject({
-                    errcode: 2,
-                    errmsg: error,
-                    name: val.name
-                });
+                val.errcode = 1;
+                val.errmsg = error;
+                reject(val);
             }
             else if (response.statusCode !== 200) {
-                reject({
-                    errcode: 1,
-                    errmsg: response.statusCode,
-                    name: val.name
-                });
+                val.errcode = 2;
+                val.errmsg = response.statusCode;
+                reject(val);
             }
             else {
                 let reg = new RegExp(val.reg);
