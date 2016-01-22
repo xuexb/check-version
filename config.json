@@ -57,6 +57,12 @@
             "url": "https://github.com/xuexb/mdjs/releases",
             "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
             "match": "$2"
+        },
+        {
+            "name": "apijs",
+            "url": "https://github.com/xuexb/apijs/releases",
+            "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
+            "match": "$2"
         }
     ]
 }
