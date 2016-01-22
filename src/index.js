@@ -16,7 +16,7 @@ let rule = config.rule;
 let resPromise = [];
 
 rule.forEach((val) => {
-    let defer = new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
 
         // console.info('开始加载：' + val.url);
 
@@ -55,15 +55,9 @@ rule.forEach((val) => {
                 resolve(val);
             }
         });
+    }).then(data => {
+        console.log(data.name + ' => ' + data.version);
+    }, err => {
+        console.error(err);
     });
-
-    resPromise.push(defer);
-});
-
-Promise.all(resPromise).then(data => {
-    data.forEach(val => {
-        console.log(val.name + ' => ' + val.version);
-    });
-}, err => {
-    console.error(err);
 });
