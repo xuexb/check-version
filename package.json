@@ -21,8 +21,9 @@
   "homepage": "https://github.com/xuexb/check-version#readme",
   "devDependencies": {
     "babel": "5.8.21",
+    "babel-runtime": "^5.8.20",
+    "colors": "1.x.x",
     "fecs": "0.4.x",
-    "request": "^2.67.0",
-    "babel-runtime": "^5.8.20"
+    "request": "2.x.x"
   }
 }

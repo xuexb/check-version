@@ -7,19 +7,16 @@
 'use strict';
 
 import request from 'request';
+import {green, red} from 'colors/safe';
 
 import config from '../config.json';
 import header from '../header.json';
 
-let rule = config.rule;
 
-let resPromise = [];
+let rule = config.rule;
 
 rule.forEach((val) => {
     new Promise((resolve, reject) => {
-
-        // console.info('开始加载：' + val.url);
-
         request.get({
             headers: header,
             url: val.url
@@ -56,8 +53,13 @@ rule.forEach((val) => {
             }
         });
     }).then(data => {
-        console.log(data.name + ' => ' + data.version);
+        if (data.version) {
+            console.log(green(data.name + ' => ' + data.version));
+        }
+        else {
+            console.log(red(data.name + ' => ' + data.version));
+        }
     }, err => {
-        console.error(err);
+        console.error(red(err));
     });
 });
