@@ -29,16 +29,22 @@ The results are as follows:
 
 ```
 nginx => 1.9.9
-nodejs 4.x => 4.2.4
-nodejs 5.x => 5.4.1
+requirejs => 2.1.22
 jquery 1.x => 1.12.0
 jquery 2.x => 2.2.0
-requirejs => 2.1.22
+apijs => null
+nodejs 5.x => 5.5.0
+mdjs => 0.1.9
 seajs 2.x => 2.2.3
 seajs 3.x => 3.0.0
-thinkjs 2.x => 2.1.2
+nodejs 4.x => 4.2.6
 key-cache => 0.1.5
-mdjs => 0.1.9
+thinkjs 2.x => 2.1.3
+------------------------
+有 3 个更新
+nginx 1.9.8 => 1.9.9
+nodejs 4.x 4.2 => 4.2.6
+mdjs 0.1.3 => 0.1.9
 ```
 
 ## config.json
