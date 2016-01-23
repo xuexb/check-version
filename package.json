@@ -24,6 +24,7 @@
     "babel-runtime": "^5.8.20",
     "colors": "1.x.x",
     "fecs": "0.4.x",
+    "key-cache": "0.x.x",
     "request": "2.x.x"
   }
 }

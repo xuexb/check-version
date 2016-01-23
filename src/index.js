@@ -8,15 +8,22 @@
 
 import request from 'request';
 import {green, red} from 'colors/safe';
+import KeyCache from 'key-cache';
 
 import config from '../config.json';
 import header from '../header.json';
 
-
+let promiseAll = [];
 let rule = config.rule;
 
+let cache = new KeyCache({
+    dir: './cache/'
+});
+
+let lastVertion = cache.get('lastVertion') || {};
+
 rule.forEach((val) => {
-    new Promise((resolve, reject) => {
+    let temp = new Promise((resolve, reject) => {
         request.get({
             headers: header,
             url: val.url
@@ -59,7 +66,44 @@ rule.forEach((val) => {
         else {
             console.log(red(data.name + ' => ' + data.version));
         }
+
+        return data;
     }, err => {
         console.error(red(err));
     });
+
+    promiseAll.push(temp);
+});
+
+Promise.all(promiseAll).then(data => {
+    let update = [];
+
+    console.log('------------------------');
+
+    data.forEach(val => {
+        let key = val.name;
+
+        if (lastVertion[key]) {
+            if (val.version > lastVertion[key]) {
+                val.lastVertion = lastVertion[key];
+                update.push(val);
+                lastVertion[key] = val.version;
+            }
+        }
+        else {
+            lastVertion[key] = val.version;
+        }
+    });
+
+    if (!update.length) {
+        console.log(green('没有更新'));
+    }
+    else {
+        console.log(green('有 ') + red(update.length) + green(' 个更新'));
+        update.forEach(val => {
+            console.log(green(val.name + ' ' + val.lastVertion + ' => ' + val.version));
+        });
+    }
+
+    cache.set('lastVertion', lastVertion);
 });
