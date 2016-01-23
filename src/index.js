@@ -83,8 +83,14 @@ Promise.all(promiseAll).then(data => {
     data.forEach(val => {
         let key = val.name;
 
-        if (lastVertion[key]) {
-            if (val.version > lastVertion[key]) {
+        // 如果没有获取到版本
+        if (!val.version) {
+            return;
+        }
+
+        // 如果上个版本缓存过
+        if (lastVertion.hasOwnProperty(key)) {
+            if (val.version > lastVertion[key] || lastVertion[key] === null) {
                 val.lastVertion = lastVertion[key];
                 update.push(val);
                 lastVertion[key] = val.version;
