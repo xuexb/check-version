@@ -17,7 +17,8 @@ let promiseAll = [];
 let rule = config.rule;
 
 let cache = new KeyCache({
-    dir: './cache/'
+    dir: './cache/',
+    md5key: false
 });
 
 let lastVertion = cache.get('lastVertion') || {};
