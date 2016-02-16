@@ -63,6 +63,12 @@
             "url": "https://github.com/xuexb/apijs/releases",
             "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
             "match": "$2"
+        },
+        {
+            "name": "fecs",
+            "url": "https://github.com/ecomfe/fecs/releases",
+            "reg": "<span class=\"(tag-name|css-truncate-target)\">(.+?)</span>",
+            "match": "$2"
         }
     ]
 }
