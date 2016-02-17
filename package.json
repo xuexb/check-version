@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Inspection Service version",
   "main": "lib/index.js",
+  "bin": "./bin/check-version",
   "scripts": {
     "check": "fecs check src/ test/",
     "compile": "babel --optional runtime --loose all --stage 0 --modules common src/ --out-dir lib/",
     "watch": "npm run compile -- --watch",
-    "start": "node lib/index.js"
+    "start": "./bin/check-version"
   },
   "repository": {
     "type": "git",
