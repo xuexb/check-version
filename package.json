@@ -1,6 +1,6 @@
 {
   "name": "check-version",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Inspection Service version",
   "main": "lib/index.js",
   "bin": "./bin/check-version",
@@ -8,6 +8,7 @@
     "check": "fecs check src/ test/",
     "compile": "babel --optional runtime --loose all --stage 0 --modules common src/ --out-dir lib/",
     "watch": "npm run compile -- --watch",
+    "prepublish": "npm run compile",
     "start": "./bin/check-version"
   },
   "repository": {
