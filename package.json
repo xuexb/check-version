@@ -27,6 +27,7 @@
     "colors": "1.x.x",
     "fecs": "0.4.x",
     "key-cache": "0.x.x",
+    "marked": "^0.3.5",
     "node-schedule": "^1.0.0",
     "nodemailer": "^2.1.0",
     "request": "2.x.x"

@@ -9,6 +9,9 @@
 import request from 'request';
 import KeyCache from 'key-cache';
 
+import sendMail from './sendMail';
+import printLog from './printLog';
+
 import config from '../config.json';
 
 let cache = new KeyCache({
@@ -16,15 +19,38 @@ let cache = new KeyCache({
     md5key: false
 });
 
-export default () => {
+let Check = (options = {}) => {
+    // 如果没有需要监听
+    if (!options.watch) {
+        return Check.exec(options);
+    }
+};
+
+Check.exec = (options = {}) => {
+    let defer = Check.getData(options);
+
+    return defer.then(data => sendMail(options, data)).then(data => printLog(options, data)).catch(err => {
+        console.error(err);
+        return err;
+    });
+};
+
+
+Check.getData = (options = {}) => {
     let promiseAll = [];
 
     let lastVertion = cache.get('lastVertion') || {};
 
-    config.rule.forEach((val) => {
+    options = {...config, ...options};
+
+    if (!options.rule || !options.rule.length) {
+        return Promise.reject('config.rule 为空');
+    }
+
+    options.rule.forEach(val => {
         let temp = new Promise((resolve, reject) => {
             request.get({
-                headers: config.header,
+                headers: options.header,
                 url: val.url
             }, (error, response, body) => {
                 if (error) {
@@ -47,7 +73,6 @@ export default () => {
                         if (body && body.length > match - 1) {
                             body = body[match];
                         }
-
                     }
                     catch (e) {
                         body = null;
@@ -82,12 +107,11 @@ export default () => {
                 if (val.version > lastVertion[key] || lastVertion[key] === null) {
                     val.lastVertion = lastVertion[key];
                     res.update.push(val);
-                    lastVertion[key] = val.version;
                 }
             }
-            else {
-                lastVertion[key] = val.version;
-            }
+
+            // 写放当前版本
+            lastVertion[key] = val.version;
         });
 
         cache.set('lastVertion', lastVertion);
@@ -95,3 +119,5 @@ export default () => {
         return res;
     });
 };
+
+export default Check;
