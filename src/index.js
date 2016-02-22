@@ -8,6 +8,7 @@
 
 import request from 'request';
 import KeyCache from 'key-cache';
+import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
 import sendMail from './sendMail';
 import printLog from './printLog';
@@ -24,15 +25,27 @@ let Check = (options = {}) => {
     if (!options.watch) {
         return Check.exec(options);
     }
+
+    let rule = new RecurrenceRule();
+    if (options.time === 'day') {
+        rule.hour = 0;
+    }
+    else {
+        rule.minute = 0;
+    }
+
+    // 先执行下，再绑定定时事件
+    Check.exec(options).then(() => {
+        scheduleJob(rule, () => Check.exec(options))
+    });
 };
 
 Check.exec = (options = {}) => {
     let defer = Check.getData(options);
 
-    return defer.then(data => sendMail(options, data)).then(data => printLog(options, data)).catch(err => {
-        console.error(err);
-        return err;
-    });
+    console.log('exec');
+
+    return defer.then(data => sendMail(options, data)).then(data => printLog(options, data))
 };
 
 
