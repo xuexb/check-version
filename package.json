@@ -23,7 +23,7 @@
   "homepage": "https://github.com/xuexb/check-version#readme",
   "devDependencies": {
     "babel": "5.8.21",
-    "fecs": "0.4.x"
+    "fecs": "*"
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
