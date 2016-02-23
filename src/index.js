@@ -11,7 +11,7 @@ import KeyCache from 'key-cache';
 import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
 import sendMail from './sendMail';
-import printLog from './printLog';
+import {send, success, error} from './log';
 import config from '../config.json';
 
 // 创建缓存
@@ -44,7 +44,7 @@ let cache = new KeyCache({
 let Check = (options = {}) => {
     // 如果没有需要监听
     if (!options.watch) {
-        return Check.exec(options);
+        return Check._exec(options);
     }
     
     // 先执行下，再绑定事件
@@ -76,9 +76,9 @@ let Check = (options = {}) => {
 Check._exec = (options = {}) => {
     let defer = Check.getData(options);
 
-    console.log('_exec');
-
-    return defer.then(data => sendMail(options, data)).then(data => printLog(options, data))
+    return defer.then(data => sendMail(options, data)).then(data => send(options, data)).catch(err => {
+        error(err);
+    });
 };
 
 

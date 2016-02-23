@@ -12,6 +12,13 @@ import marked from 'marked';
 import path from 'path';
 import {readFileSync} from 'fs';
 
+/**
+ * 获取邮件模板
+ *
+ * @param  {Object} data 数据对象
+ *
+ * @return {string}      html代码
+ */
 let getMailTpl = data => {
     let html = [];
     let update = {};

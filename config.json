@@ -2,7 +2,6 @@
     "watch": false,
     "email": {
         "on": true,
-        "to": "xieyaowu@baidu.com",
         "user": "",
         "pass": "",
         "host": "smtp.qq.com"
@@ -11,7 +10,7 @@
     "header": {
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36"
     },
-    "rule": [{
+    "rulde": [{
         "name": "nginx",
         "url": "http://nginx.org/",
         "reg": "class=\"date\"><a name=\".+?\"><\/a>.+?<\/td><td><p><a href=\"en\/download.html\">nginx-([^\/]+?)<\/a>"
