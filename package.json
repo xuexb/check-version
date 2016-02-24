@@ -27,11 +27,12 @@
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
     "key-cache": "0.x.x",
     "marked": "^0.3.5",
     "node-schedule": "^1.0.0",
     "nodemailer": "^2.1.0",
-    "request": "2.x.x",
-    "colors": "^1.1.2"
+    "request": "2.x.x"
   }
 }
