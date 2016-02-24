@@ -10,7 +10,7 @@ import request from 'request';
 import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
 import cache from './cache';
-import sendMail from './sendMail';
+import sendMail from './mail';
 import {send, error} from './log';
 import config from '../config.json';
 
@@ -45,6 +45,8 @@ let Check = (options = {}) => {
     return Check._exec(options).then(data => {
         // 创建定时任务
         let rule = new RecurrenceRule();
+
+        // 如果是每天检查则设置每天的00:00检查，否则设置为每小时的0分检查
         if (options.time === 'day') {
             rule.hour = 0;
         }
@@ -88,7 +90,7 @@ Check.getData = (options = {}) => {
     options = {...config, ...options};
 
     if (!options.rule || !options.rule.length) {
-        return Promise.reject('config.rule 为空');
+        return Promise.reject('config.rule is empty');
     }
 
     let promiseAll = [];

@@ -16,7 +16,7 @@ let {log} = console;
  * @param  {string} str 信息
  */
 function error(str) {
-    log(String(str).red);
+    log(String('【check-version】: ' + str).red);
 }
 
 /**
@@ -25,7 +25,7 @@ function error(str) {
  * @param  {string} str 信息
  */
 function success(str) {
-    log(String(str).green);
+    log(String('【check-version】: ' + str).green);
 }
 
 /**
@@ -46,11 +46,16 @@ function send(options = {}, data = {}) {
         }
 
         // 美好的分隔线
-        success(`\n-------------\n`);
+        success(`-------------`);
 
         // 循环输出
         data.all.forEach(val => {
-            success(`${val.name} 当前版本：${val.version}`);
+            if (val.lastVertion) {
+                success(`${val.name} : ${val.lastVertion} => ${val.version}`);
+            }
+            else {
+                success(`${val.name} : ${val.version}`);
+            }
         });
 
         resolve(data);

@@ -68,7 +68,7 @@ export default function (options = {}, data = {}) {
         }
 
         if (!options.email.to || !options.email.user || !options.email.pass || !options.email.host) {
-            return reject('config.email 解析错误');
+            return reject('config.email parse error');
         }
 
         // 开启一个 SMTP 连接池

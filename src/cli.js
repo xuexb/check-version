@@ -32,12 +32,12 @@ let getConfig = function () {
 
         // 如果没有配置文件
         if (!configpath || 'string' !== typeof configpath) {
-            return reject('请先使用【command -c /file/path】设置配置文件路径');
+            return reject('Please set the profile path using 【check-version  -c filepath】');
         }
 
         // 配置文件不存在
         if (!existsSync(configpath)) {
-            return reject('配置文件不存在');
+            return reject('Config file does not exist');
         }
 
         let config;
@@ -49,7 +49,7 @@ let getConfig = function () {
             config = JSON.parse(config);
         }
         catch (e) {
-            return reject(e.message);
+            return reject('Failed to parse the config file');
         }
 
         resolve(config);
@@ -67,7 +67,7 @@ let setConfig = function (configpath) {
     return new Promise((resolve, reject) => {
         // 路径设置有问题
         if (configpath === 'true') {
-            return reject('please set the correct file path');
+            return reject('Please set the config file path');
         }
 
         // 解析路径
@@ -75,7 +75,7 @@ let setConfig = function (configpath) {
 
         // 如果文件不存在
         if (!existsSync(configpath)) {
-            return reject('config file does not exist');
+            return reject('Config file does not exist');
         }
 
         // 设置缓存
@@ -88,7 +88,7 @@ let setConfig = function (configpath) {
 // 如果是在配置文件
 if (program.config) {
     setConfig(program.config).then(data => {
-        success('config success : ' + data);
+        success('Setting success, the file path is : ' + data);
     }).catch(err => error(err));
 }
 else {
