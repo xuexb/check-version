@@ -9,7 +9,7 @@
     "compile": "babel --optional runtime --loose all --stage 0 --modules common src/ --out-dir lib/",
     "watch": "npm run compile -- --watch",
     "prepublish": "npm run compile",
-    "start": "./bin/check-version"
+    "start": "node start.js"
   },
   "repository": {
     "type": "git",
