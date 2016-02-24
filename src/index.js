@@ -156,7 +156,7 @@ Check.getData = (options = {}) => {
 
             // 如果上个版本缓存过
             if (lastVertion.hasOwnProperty(key)) {
-                if (val.version > lastVertion[key] || lastVertion[key] === null) {
+                if (val.version !== lastVertion[key] || lastVertion[key] === null) {
                     val.lastVertion = lastVertion[key];
                     res.update.push(val);
                 }
