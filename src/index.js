@@ -7,18 +7,12 @@
 'use strict';
 
 import request from 'request';
-import KeyCache from 'key-cache';
 import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
+import cache from './cache';
 import sendMail from './sendMail';
-import {send, success, error} from './log';
+import {send, error} from './log';
 import config from '../config.json';
-
-// 创建缓存
-let cache = new KeyCache({
-    dir: './cache/',
-    md5key: false
-});
 
 /**
  * 构造函数
@@ -37,7 +31,7 @@ let cache = new KeyCache({
  * @param {string}      options.rule[].name         规则名称，唯一key
  * @param {string}      options.rule[].url          请求链接
  * @param {string}      options.rule[].reg          规则的正则表达式，需要转义
- * @param {string}      [options.rule[].match=$1]   规则查找$
+ * @param {string}      options.rule[].match   规则查找$
  *
  * @return {Promise}    请求数据的Promise
  */
@@ -46,9 +40,9 @@ let Check = (options = {}) => {
     if (!options.watch) {
         return Check._exec(options);
     }
-    
+
     // 先执行下，再绑定事件
-    return Check._exec(options).then((data) => {
+    return Check._exec(options).then(data => {
         // 创建定时任务
         let rule = new RecurrenceRule();
         if (options.time === 'day') {
@@ -98,7 +92,7 @@ Check.getData = (options = {}) => {
     }
 
     let promiseAll = [];
-    let lastVertion = cache.get('lastVertion') || {};
+    let lastVertion = cache.get('version') || {};
 
     // 循环规则，生成Promise
     options.rule.forEach(val => {
@@ -170,7 +164,7 @@ Check.getData = (options = {}) => {
             lastVertion[key] = val.version;
         });
 
-        cache.set('lastVertion', lastVertion);
+        cache.set('version', lastVertion);
 
         return res;
     });

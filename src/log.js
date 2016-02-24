@@ -19,12 +19,17 @@ function error(str) {
     log(String(str).red);
 }
 
+/**
+ * 输出成功日志
+ *
+ * @param  {string} str 信息
+ */
 function success(str) {
     log(String(str).green);
 }
 
 /**
- * 发送邮件方法
+ * 发送日志方法
  *
  * @param  {Object} options 配置对象
  * @param  {Object} data    数据对象
@@ -57,4 +62,4 @@ export {
     send,
     success,
     error
-}
+};
