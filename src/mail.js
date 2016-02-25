@@ -38,7 +38,7 @@ let getMailTpl = data => {
 
     data.all.forEach(val => {
         if (!update[val.name]) {
-            html.push(`${val.name} | ${val.lastVertion || '-'} | 无更新`);
+            html.push(`${val.name} | ${val.version || '-'} | 无更新`);
         }
 
         delete update[val.name];
