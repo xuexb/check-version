@@ -54,8 +54,10 @@ function send(options = {}, data = {}) {
 
         // 循环输出
         data.all.forEach(val => {
-            if (val.lastVertion) {
-                success(`${val.name} : ${val.lastVertion} => ${val.version}`);
+            // 如果有上次的版本号
+            // 如果上次为null，那么则说明这次不是null了，这次更新了，则提示下
+            if (val.prevVersion || val.prevVersion === null) {
+                success(`${val.name} : ${val.prevVersion} => ${val.version}`);
             }
             else {
                 success(`${val.name} : ${val.version}`);

@@ -89,25 +89,33 @@ Check.getData = (options = {}) => {
     // 合并参数
     options = {...config, ...options};
 
+    // 如果规则不存在则报错
     if (!options.rule || !options.rule.length) {
         return Promise.reject('config.rule is empty');
     }
 
+    // 所有请求的promise，并列执行，后续优化成串行的
     let promiseAll = [];
-    let lastVertion = cache.get('version') || {};
+
+    // 上次版本号的缓存
+    let versionCache = cache.get('version') || {};
 
     // 循环规则，生成Promise
     options.rule.forEach(val => {
+        // 生成一个promise
         let defer = new Promise((resolve, reject) => {
+            // 请求源码
             request.get({
-                headers: options.header,
+                headers: options.header || {},
                 url: val.url
             }, (err, response, body) => {
+                // 如果有错误
                 if (err) {
                     val.errcode = 1;
                     val.errmsg = err;
                     reject(val);
                 }
+                // 如果响应码不是200
                 else if (response.statusCode !== 200) {
                     val.errcode = 2;
                     val.errmsg = response.statusCode;
@@ -151,23 +159,25 @@ Check.getData = (options = {}) => {
 
             // 如果没有获取到版本
             if (!val.version) {
+                versionCache[key] = val.version;
                 return;
             }
 
             // 如果上个版本缓存过
-            if (lastVertion.hasOwnProperty(key)) {
-                if (val.version !== lastVertion[key] || lastVertion[key] === null) {
-                    val.lastVertion = lastVertion[key];
+            // 如果是新加的规则则忽略，因为新加的无法与上次对比查看是否有更新
+            if (versionCache.hasOwnProperty(key)) {
+                // 如果版本号不同
+                // 如果上次为null，而走到这里时当前版本肯定是有的，然后这就算更新了
+                if (val.version !== versionCache[key] || versionCache[key] === null) {
+                    val.prevVersion = versionCache[key];
                     res.update.push(val);
                 }
             }
 
-            // 写放当前版本
-            lastVertion[key] = val.version;
+            versionCache[key] = val.version;
         });
 
-        cache.set('version', lastVertion);
-
+        cache.set('version', versionCache);
         return res;
     });
 };

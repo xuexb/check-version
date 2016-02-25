@@ -30,7 +30,7 @@ let getMailTpl = data => {
     html.push('--- | --- | ---');
 
     data.update.forEach(val => {
-        html.push(`${val.name} | ${val.lastVertion || '-'} -> ${val.version || '-'} | 有更新`);
+        html.push(`${val.name} | ${val.prevVersion || '-'} -> ${val.version || '-'} | 有更新`);
 
         // 打上已更新标识
         update[val.name] = true;
