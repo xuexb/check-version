@@ -36,7 +36,7 @@ let getMailTpl = data => {
         update[val.name] = true;
     });
 
-    data.update.forEach(val => {
+    data.all.forEach(val => {
         if (!update[val.name]) {
             html.push(`${val.name} | ${val.lastVertion || '-'} | 无更新`);
         }
