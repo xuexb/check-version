@@ -66,7 +66,7 @@ let getConfig = function () {
 let setConfig = function (configpath) {
     return new Promise((resolve, reject) => {
         // 路径设置有问题
-        if (configpath === 'true') {
+        if (configpath === 'true' || configpath === true) {
             return reject('Please set the config file path');
         }
 
