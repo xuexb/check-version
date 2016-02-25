@@ -8,15 +8,13 @@
 
 import 'colors';
 
-let {log} = console;
-
 /**
  * 输出错误日志
  *
  * @param  {string} str 信息
  */
 function error(str) {
-    log(String('【check-version】: ' + str).red);
+    console.error(String('【check-version】: ' + str).red);
 }
 
 /**
@@ -25,7 +23,7 @@ function error(str) {
  * @param  {string} str 信息
  */
 function success(str) {
-    log(String('【check-version】: ' + str).green);
+    console.log(String('【check-version】: ' + str).green);
 }
 
 /**
