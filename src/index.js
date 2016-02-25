@@ -98,14 +98,14 @@ Check.getData = (options = {}) => {
 
     // 循环规则，生成Promise
     options.rule.forEach(val => {
-        let temp = new Promise((resolve, reject) => {
+        let defer = new Promise((resolve, reject) => {
             request.get({
                 headers: options.header,
                 url: val.url
-            }, (error, response, body) => {
-                if (error) {
+            }, (err, response, body) => {
+                if (err) {
                     val.errcode = 1;
-                    val.errmsg = error;
+                    val.errmsg = err;
                     reject(val);
                 }
                 else if (response.statusCode !== 200) {
@@ -135,7 +135,7 @@ Check.getData = (options = {}) => {
             });
         });
 
-        promiseAll.push(temp);
+        promiseAll.push(defer);
     });
 
     // 并行执行请求
