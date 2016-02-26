@@ -38,5 +38,8 @@
     "node-schedule": "^1.0.0",
     "nodemailer": "^2.1.0",
     "request": "2.x.x"
+  },
+  "engines": {
+    "node": ">= 0.12.0"
   }
 }
