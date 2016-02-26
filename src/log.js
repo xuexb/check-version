@@ -11,7 +11,7 @@ import 'colors';
 /**
  * 输出错误日志
  *
- * @param  {string||Object} str 信息
+ * @param  {string|Object} str 信息
  */
 function error(str) {
     if ('object' === typeof str) {
@@ -23,7 +23,7 @@ function error(str) {
 /**
  * 输出成功日志
  *
- * @param  {string||Object} str 信息
+ * @param  {string|Object} str 信息
  */
 function success(str) {
     if ('object' === typeof str) {
