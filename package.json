@@ -11,8 +11,13 @@
     "compile": "babel --optional runtime --loose all --stage 0 --modules common src/ --out-dir lib/",
     "watch": "npm run compile -- --watch",
     "prepublish": "npm run compile",
+    "hook-install": "prepush install",
+    "hook-remove": "prepush remove",
     "start": "node start.js"
   },
+  "prepush": [
+    "npm run check"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xuexb/check-version.git"
@@ -27,7 +32,8 @@
     "babel": "5.8.21",
     "fecs": "*",
     "istanbul": "^0.4.1",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "prepush": "*"
   },
   "dependencies": {
     "babel-runtime": "^5.8.20",
