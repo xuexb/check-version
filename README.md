@@ -2,6 +2,12 @@
 
 Inspection Service version
 
+[![NPM Version](https://img.shields.io/npm/v/check-version.svg)](https://npmjs.org/package/check-version)
+[![NPM Downloads](https://img.shields.io/npm/dm/check-version.svg)](https://npmjs.org/package/check-version)
+[![Linux Build](https://img.shields.io/travis/xuexb/check-version/master.svg?label=linux)](https://travis-ci.org/xuexb/check-version)
+[![Windows Build](https://img.shields.io/appveyor/ci/xuexb/check-version/master.svg?label=windows)](https://ci.appveyor.com/project/xuexb/check-version)
+[![Test Coverage](https://img.shields.io/coveralls/xuexb/check-version/master.svg)](https://coveralls.io/r/xuexb/check-version?branch=master)
+
 I am more concerned about the latest version of some services, such as the commonly used nginx, jquery, nodejs like, I have become accustomed to the company every day to open the computer first thing to individually open each service's official website, and check the version number, then see if there are updates under changelog and other forms of, but I want to write a web service relies on nodejs do it ~
 
 ## use
@@ -38,7 +44,7 @@ mdjs => 0.1.9
 seajs 2.x => 2.2.3
 seajs 3.x => 3.0.0
 nodejs 4.x => 4.2.6
-key-cache => 0.1.5
+check-version => 0.1.5
 thinkjs 2.x => 2.1.3
 ------------------------
 有 3 个更新
