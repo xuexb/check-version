@@ -9,7 +9,7 @@ var assert = require('assert');
 var strictEqual = assert.strictEqual;
 var Check = require('../');
 
-describe('key-cache', function () {
+describe('check-version', function () {
     it('new', function () {
         strictEqual(typeof Check, 'function');
     });
