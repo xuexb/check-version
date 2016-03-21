@@ -26,7 +26,7 @@ describe('log.js', function () {
     });
 
     it('success', function () {
-        var _log = console.log;
+        var backlog = console.log;
         var num = 0;
         global.console.log = function () {
             num += 1;
@@ -35,11 +35,11 @@ describe('log.js', function () {
             log.success(msg);
         });
         strictEqual(num, types.length);
-        global.console.log = _log;
+        global.console.log = backlog;
     });
 
     it('send promise', function (done) {
-        var _log = global.console.log;
+        var backlog = global.console.log;
 
         global.console.log = function () {};
 
@@ -49,13 +49,13 @@ describe('log.js', function () {
         }).then(function (data) {
             strictEqual(data.update.length, 0);
             strictEqual(data.all.length, 0);
-            global.console.log = _log;
+            global.console.log = backlog;
             done();
         });
     });
 
     it('send update:1', function (done) {
-        var _log = global.console.log;
+        var backlog = global.console.log;
         var num = 0;
 
         global.console.log = function () {
@@ -84,7 +84,7 @@ describe('log.js', function () {
             ]
         }).then(function (data) {
             // console.error(data)
-            global.console.log = _log;
+            global.console.log = backlog;
             setTimeout(function () {
                 strictEqual(num, 4);
                 done();
