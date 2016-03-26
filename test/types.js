@@ -19,5 +19,6 @@ module.exports = [
     {a: 1},
     function () {},
     'string',
-    /1/
+    /1/,
+    undefined
 ];
