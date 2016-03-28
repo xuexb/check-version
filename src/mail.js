@@ -4,8 +4,6 @@
  * @email fe.xiaowu@gmail.com
  */
 
-'use strict';
-
 import nodemailer from 'nodemailer';
 import marked from 'marked';
 

@@ -4,8 +4,6 @@
  * @email fe.xiaowu@gmail.com
  */
 
-'use strict';
-
 import request from 'request';
 import {RecurrenceRule, scheduleJob} from 'node-schedule';
 

@@ -4,8 +4,6 @@
  * @email fe.xiaowu@gmail.com
  */
 
-'use strict';
-
 import 'colors';
 
 /**
@@ -69,7 +67,6 @@ function send(options = {}, data = {}) {
 }
 
 export {
-    send as default,
     send,
     success,
     error

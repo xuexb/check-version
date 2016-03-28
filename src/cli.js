@@ -4,8 +4,6 @@
  * @email fe.xiaowu@gmail.com
  */
 
-'use strict';
-
 import {readFileSync, existsSync} from 'fs';
 import path from 'path';
 import program from 'commander';
