@@ -3,73 +3,75 @@
  * @author xiaowu
  */
 
-'use strict';
+import should from 'should';
 
-var assert = require('assert');
-var strictEqual = assert.strictEqual;
-var Check = require('../');
+import Check from '../src/index';
+import types from './types';
 
-describe('check-version', function () {
-    it('new', function () {
-        strictEqual(typeof Check, 'function');
+
+
+describe('check-version', () => {
+    it('new', () => {
+        Check.should.be.type('function');
     });
 
-    it('getData()', function (done) {
-        var flag;
+    // it('getData()', done => {
+    //     var flag;
 
-        Check.getData().then(function () {
-            flag = true;
-        }).catch(function () {
-            flag = false;
-        });
+    //     Check.getData().then(() => {
+    //         flag = true;
+    //     }).catch(() => {
+    //         flag = false;
+    //     });
 
-        setTimeout(function () {
-            strictEqual(flag, false);
-            done();
-        });
-    });
+    //     setTimeout(() => {
+    //         strictEqual(flag, false);
+    //         done();
+    //     });
+    // });
 
-    it('getData({rule: []})', function (done) {
-        var flag;
+    it('Check.getData promise', () => Check.getData().should.be.Promise());
+    it('getData({rule: []})', done => {
+        let flag;
 
         Check.getData({
             rule: []
-        }).then(function () {
+        }).then(() => {
             flag = true;
-        }).catch(function () {
+        }).catch(() => {
             flag = false;
         });
 
-        setTimeout(function () {
-            strictEqual(flag, false);
+        setTimeout(() => {
+            flag.should.be.false();
             done();
         });
     });
 
-    it('getData load error', function (done) {
-        Check.getData({
-            rule: [
-                {
-                    url: '/getData'
-                }
-            ]
-        }).then(function () {
-            strictEqual(false, true, '请求判断失败');
-            done();
-        }).catch(function (data) {
-            strictEqual(data.errcode, 1, 'errcode is 1');
-            done();
-        });
-    });
+    // it('getData load error', done => {
+    //     Check.getData({
+    //         rule: [
+    //             {
+    //                 url: '/getData'
+    //             }
+    //         ]
+    //     }).then(() => {
+    //         strictEqual(false, true, '请求判断失败');
+    //         done();
+    //     }).catch(function (data) {
+    //         strictEqual(data.errcode, 1, 'errcode is 1');
+    //         done();
+    //     });
+    // });
 
-    // it('getData statusCode error', function (done) {
+    // it('getData statusCode error', done => {
     //     Check.getData({
     //         rule: [
     //             {
     //                 url: 'https://xuexb.com/404'
     //             }
     //         ]
-    //     }).then(function () {
+    //     }).then(() => {
     //         strictEqual(false, true, '请求判断失败');
     //         done();
     //     }).catch(function (data) {

@@ -3,66 +3,57 @@
  * @author xiaowu
  */
 
-'use strict';
+import should from 'should';
 
-var assert = require('assert');
-var strictEqual = assert.strictEqual;
-var log = require('../lib/log');
-var types = require('./types');
+import {success, error, send} from '../src/log';
+import types from './types';
 
-describe('log.js', function () {
 
-    it('error', function () {
-        var error = console.error;
-        var num = 0;
-        global.console.error = function () {
+describe('log.js', () => {
+
+    it('error', () => {
+        let oldError = console.error;
+        let num = 0;
+        global.console.error = () => {
             num += 1;
         };
-        types.forEach(function (msg) {
-            log.error(msg);
-        });
-        strictEqual(num, types.length);
-        global.console.error = error;
+        types.forEach(msg => error(msg));
+
+        num.should.be.equal(types.length);
+        global.console.error = oldError;
     });
 
-    it('success', function () {
-        var backlog = console.log;
-        var num = 0;
-        global.console.log = function () {
+    it('success', () => {
+        let oldLog = console.log;
+        let num = 0;
+        global.console.log = () => {
             num += 1;
         };
-        types.forEach(function (msg) {
-            log.success(msg);
-        });
-        strictEqual(num, types.length);
-        global.console.log = backlog;
+        types.forEach(msg => success(msg));
+
+        num.should.be.equal(types.length);
+
+        global.console.log = oldLog;
     });
 
-    it('send promise', function (done) {
-        var backlog = global.console.log;
+    it('send promise', () => {
+        send().should.be.Promise();
+    });
 
-        global.console.log = function () {};
+    it('send({}, {})', done => {
 
-        log.send({}, {
+        return send({}, {
             update: [],
             all: []
-        }).then(function (data) {
-            strictEqual(data.update.length, 0);
-            strictEqual(data.all.length, 0);
-            global.console.log = backlog;
+        }).then((data) => {
+            data.update.length.should.be.equal(0);
+            data.all.length.should.be.equal(0);
             done();
         });
     });
 
-    it('send update:1', function (done) {
-        var backlog = global.console.log;
-        var num = 0;
-
-        global.console.log = function () {
-            num += 1;
-        };
-
-        log.send({}, {
+    it('send update:1', done => {
+        send({}, {
             update: [
                 {
                     prevVersion: 1,
@@ -83,12 +74,7 @@ describe('log.js', function () {
                 }
             ]
         }).then(function (data) {
-            // console.error(data)
-            global.console.log = backlog;
-            setTimeout(function () {
-                strictEqual(num, 4);
-                done();
-            });
+            done();
         });
     });
 });

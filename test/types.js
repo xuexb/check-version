@@ -3,9 +3,7 @@
  * @author xiaowu
  */
 
-'use strict';
-
-module.exports = [
+export default [
     false,
     true,
     0,
