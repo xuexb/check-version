@@ -3,7 +3,7 @@
  * @author xiaowu
  */
 
-import should from 'should';
+import 'should';
 
 import {success, error, send} from '../src/log';
 import types from './types';
@@ -45,7 +45,7 @@ describe('log.js', () => {
         return send({}, {
             update: [],
             all: []
-        }).then((data) => {
+        }).then(data => {
             data.update.length.should.be.equal(0);
             data.all.length.should.be.equal(0);
             done();

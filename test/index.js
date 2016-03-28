@@ -3,7 +3,7 @@
  * @author xiaowu
  */
 
-import should from 'should';
+import 'should';
 
 import Check from '../src/index';
 import types from './types';

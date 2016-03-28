@@ -11,7 +11,7 @@ import 'colors';
  *
  * @param  {string|Object} str 信息
  */
-function error(str) {
+export function error(str) {
     if ('object' === typeof str) {
         str = JSON.stringify(str);
     }
@@ -23,7 +23,7 @@ function error(str) {
  *
  * @param  {string|Object} str 信息
  */
-function success(str) {
+export function success(str) {
     if ('object' === typeof str) {
         str = JSON.stringify(str);
     }
@@ -38,7 +38,7 @@ function success(str) {
  *
  * @return {Promise}         Promise
  */
-function send(options = {}, data = {}) {
+export function send(options = {}, data = {}) {
     return new Promise((resolve, reject) => {
         if (data.update.length) {
             success(`当前有${data.update.length}个更新.`);
@@ -65,9 +65,3 @@ function send(options = {}, data = {}) {
         resolve(data);
     });
 }
-
-export {
-    send,
-    success,
-    error
-};
