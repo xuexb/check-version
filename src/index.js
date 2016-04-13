@@ -9,7 +9,7 @@ import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
 import cache from './cache';
 import sendMail from './mail';
-import {send, error, success} from './log';
+import {error, success} from './log';
 import config from '../config.json';
 
 /**
@@ -157,6 +157,14 @@ export default class Check {
         });
     }
 
+    /**
+     * 打印日志到控制台
+     *
+     * @param  {Object} options 配置对象
+     * @param  {Object} data    数据对象
+     *
+     * @return {Promise}         promise对象
+     */
     static _sendLog = (options = {}, data = {}) => {
         return new Promise((resolve, reject) => {
             if (data.update.length) {
