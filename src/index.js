@@ -9,7 +9,7 @@ import {RecurrenceRule, scheduleJob} from 'node-schedule';
 
 import cache from './cache';
 import sendMail from './mail';
-import {send, error} from './log';
+import {send, error, success} from './log';
 import config from '../config.json';
 
 /**
@@ -152,8 +152,36 @@ export default class Check {
     static _exec = (options = {}) => {
         let defer = Check.getData(options);
 
-        return defer.then(data => sendMail(options, data)).then(data => send(options, data)).catch(err => {
+        return defer.then(data => sendMail(options, data)).then(data => Check._sendLog(options, data)).catch(err => {
             error(err);
+        });
+    }
+
+    static _sendLog = (options = {}, data = {}) => {
+        return new Promise((resolve, reject) => {
+            if (data.update.length) {
+                success(`当前有${data.update.length}个更新.`);
+            }
+            else {
+                success(`当前无更新`);
+            }
+
+            // 美好的分隔线
+            success(`-------------`);
+
+            // 循环输出
+            data.all.forEach(val => {
+                // 如果有上次的版本号
+                // 如果上次为null，那么则说明这次不是null了，这次更新了，则提示下
+                if (val.prevVersion || val.prevVersion === null) {
+                    success(`${val.name} : ${val.prevVersion} => ${val.version}`);
+                }
+                else {
+                    success(`${val.name} : ${val.version}`);
+                }
+            });
+
+            resolve(data);
         });
     }
 
