@@ -45,46 +45,4 @@ describe('log.js', () => {
 
         num.should.be.equal(types.length);
     });
-
-    // it('send promise', () => {
-    //     log.send().should.be.Promise();
-    // });
-
-    // it('send({}, {})', done => {
-
-    //     return log.send({}, {
-    //         update: [],
-    //         all: []
-    //     }).then(data => {
-    //         data.update.length.should.be.equal(0);
-    //         data.all.length.should.be.equal(0);
-    //         done();
-    //     });
-    // });
-
-    // it('send update:1', done => {
-    //     log.send({}, {
-    //         update: [
-    //             {
-    //                 prevVersion: 1,
-    //                 name: 'test1',
-    //                 version: 2
-    //             }
-    //         ],
-    //         all: [
-    //             {
-    //                 prevVersion: null,
-    //                 name: 'test1',
-    //                 version: 0
-    //             },
-    //             {
-    //                 prevVersion: 1,
-    //                 name: 'test1',
-    //                 version: 2
-    //             }
-    //         ]
-    //     }).then(function (data) {
-    //         done();
-    //     });
-    // });
 });
